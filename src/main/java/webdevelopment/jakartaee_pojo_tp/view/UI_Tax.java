@@ -18,11 +18,19 @@ public class UI_Tax {
     }
     public static void main(String[] args) {
         UI_Tax tax = new UI_Tax();
-        String taxAuthority = "Canada";
-        double income = 4000;
-        double taxToPay = tax.displayTaxToPay(taxAuthority, income);
-        System.out.println("the tax to pay is:");
-        System.out.println("$ "+taxToPay);
+        String taxAuthorityQ = "Quebec";
+        double incomeQ = 22000;
+        double taxToPayQ = tax.displayTaxToPay(taxAuthorityQ, incomeQ);
+        String taxAuthorityC = "Canada";
+        double incomeC = 22000;
+        double taxToPayC = tax.displayTaxToPay(taxAuthorityC, incomeC);
+        double taxToPayT = taxToPayC + taxToPayQ;
+        System.out.println("the tax to pay quebec is:");
+        System.out.println("$ "+taxToPayQ);
+        System.out.println("the tax to pay canada is:");
+        System.out.println("$ "+taxToPayC);
+        System.out.println("the tax to pay combined is:");
+        System.out.println("$ " +taxToPayT);
     }
 
 }
