@@ -15,14 +15,13 @@ public class TaxCalculator {
     public TaxCalculator(ITaxBracketDAO dao){this.daoTax =dao;}
 
 
-    /*public double calculateTax(String taxAuthority, double income) {
+    public double calculateTax(String taxAuthority, double income) {
         TaxAuthority authority = this.daoTax.getTaxAuthorityByLabel(taxAuthority);
         double taxFreeThreshold = authority.getTaxFreeThreshold();
         if (taxFreeThreshold >= income){
             return 0.0;
         }
         List<TaxBracket> taxBracketList = this.daoTax.getTaxBracketsByAuthorityId(authority.getId());
-        //double taxableIncome = income - taxFreeThreshold;
         double taxOwed = 0.0;
         double maxIncomeInBracket = 0.0;
         double incomeInBracket = 0.0;
@@ -30,31 +29,34 @@ public class TaxCalculator {
             if (income > item.getMinIncome()) {
                 //find maxIncomeInBracket
                 if (item.getMaxIncome() != 0.0){
-                    maxIncomeInBracket = item.getMaxIncome();
+                    if (income < item.getMaxIncome()){
+                        maxIncomeInBracket = income;
+                    }else {
+                        maxIncomeInBracket = item.getMaxIncome();
+                    }
                 }else {
                     maxIncomeInBracket = income;
                 }
+                incomeInBracket = maxIncomeInBracket - item.getMinIncome();
+                taxOwed += incomeInBracket * (item.getTaxRate()/100);
             }// end if
-            incomeInBracket = maxIncomeInBracket - item.getMinIncome();
-            taxOwed += incomeInBracket * (item.getTaxRate()/100);
         }
         return taxOwed;
-    }*/
+    }
 
-    public double calculateTax(String taxAuthority, double income) {
+    public double calculateTaxGPT(String taxAuthority, double income) {
         TaxAuthority authority = this.daoTax.getTaxAuthorityByLabel(taxAuthority);
         double taxFreeThreshold = authority.getTaxFreeThreshold();
         if (taxFreeThreshold >= income) {
             return 0.0;
         }
 
-        double taxableIncome = income; //- taxFreeThreshold;
         List<TaxBracket> taxBracketList = this.daoTax.getTaxBracketsByAuthorityId(authority.getId());
         double taxOwed = 0.0;
 
         for (TaxBracket item : taxBracketList) {
-            if (taxableIncome > item.getMinIncome()) {
-                double maxIncomeInBracket = (item.getMaxIncome() != 0.0) ? Math.min(taxableIncome, item.getMaxIncome()) : taxableIncome;
+            if (income > item.getMinIncome()) {
+                double maxIncomeInBracket = (item.getMaxIncome() != 0.0) ? Math.min(income, item.getMaxIncome()) : income;
                 double incomeInBracket = maxIncomeInBracket - item.getMinIncome();
                 taxOwed += incomeInBracket * (item.getTaxRate() / 100);
             }
