@@ -19,10 +19,10 @@ public class UI_Tax {
     public static void main(String[] args) {
         UI_Tax tax = new UI_Tax();
         String taxAuthorityQ = "Quebec";
-        double incomeQ = 22000;
+        double incomeQ = 50000;
         double taxToPayQ = tax.displayTaxToPay(taxAuthorityQ, incomeQ);
         String taxAuthorityC = "Canada";
-        double incomeC = 22000;
+        double incomeC = 50000;
         double taxToPayC = tax.displayTaxToPay(taxAuthorityC, incomeC);
         double taxToPayT = taxToPayC + taxToPayQ;
         System.out.println("the tax to pay quebec is:");
