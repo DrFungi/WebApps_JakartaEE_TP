@@ -1,4 +1,4 @@
-package webdevelopment.jakartaee_pojo_tp;
+package webdevelopment.jakartaee_pojo_tp.control;
 
 import java.io.*;
 import jakarta.servlet.http.*;

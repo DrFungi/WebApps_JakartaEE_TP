@@ -4,6 +4,7 @@ import webdevelopment.jakartaee_pojo_tp.persistance.ITaxBracketDAO;
 import webdevelopment.jakartaee_pojo_tp.persistance.TaxBracketDAO_JDBC;
 import webdevelopment.jakartaee_pojo_tp.service.TaxCalculator;
 
+
 public class UI_Tax {
     public TaxCalculator taxCalculator;
 
@@ -13,16 +14,16 @@ public class UI_Tax {
         this.taxCalculator = new TaxCalculator(dao_tax);
     } // end of constructor
 
-    private double displayTaxToPay(String taxAuthority, double income) {
+    public double displayTaxToPay(String taxAuthority, double income) {
         return taxCalculator.calculateTax(taxAuthority, income);
     }
     public static void main(String[] args) {
         UI_Tax tax = new UI_Tax();
         String taxAuthorityQ = "Quebec";
-        double incomeQ = 50000;
+        double incomeQ = 25000;
         double taxToPayQ = tax.displayTaxToPay(taxAuthorityQ, incomeQ);
         String taxAuthorityC = "Canada";
-        double incomeC = 50000;
+        double incomeC = 25000;
         double taxToPayC = tax.displayTaxToPay(taxAuthorityC, incomeC);
         double taxToPayT = taxToPayC + taxToPayQ;
         System.out.println("the tax to pay quebec is:");
