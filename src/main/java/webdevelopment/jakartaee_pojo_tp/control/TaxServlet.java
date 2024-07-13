@@ -16,16 +16,24 @@ public class TaxServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        double income = Double.parseDouble(req.getParameter("income"));
+        double income;
+        try {
+            income = Double.parseDouble(req.getParameter("income"));
+        } catch (NumberFormatException e){
+            req.setAttribute("error", "Invalid income format. Please enter a valid number");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
+            dispatcher.forward(req,resp);
+            return;
+        }
         String authority = req.getParameter("province");
         boolean calculateFederal = req.getParameter("calculateFederal") != null;
         UI_Tax tax = new UI_Tax();
         //get the variables to know the tax to pay
         double taxToPayC = 0;
-        double taxToPayQ = tax.displayTaxToPay(authority, income);
+        double taxToPayQ = tax.displayTaxToPayQuebec(authority, income);
         // check if federal tax is requested
         if (calculateFederal){
-            taxToPayC = tax.displayTaxToPay("Canada", income);
+            taxToPayC = tax.displayTaxToPayCanada("Canada", income);
         }
 
         //calculate total tax to pay

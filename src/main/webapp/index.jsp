@@ -16,6 +16,7 @@
   <input type="text" id="income" name="income" required><br><br>
   <label for="province">Province:</label>
   <select id="province" name="province" required>
+    <option value="Quebec">Quebec</option>
     <option value="AB">Alberta</option>
     <option value="BC">British Columbia</option>
     <option value="MB">Manitoba</option>
@@ -24,13 +25,12 @@
     <option value="NS">Nova Scotia</option>
     <option value="ON">Ontario</option>
     <option value="PE">Prince Edward Island</option>
-    <option value="Quebec">Quebec</option>
     <option value="SK">Saskatchewan</option>
     <!-- Add other provinces/territories as needed -->
-  </select><br><br>
+  </select>
+  <p>WARNING!!!! THE ONLY WORKING OPTION IN THIS PROTOTYPE IS QUEBEC</p><br><br>
   <label for="calculateFederal">Check below to calculate and add federal tax:</label>
   <input type="checkbox" id="calculateFederal" name="calculateFederal" value="true"><br><br>
-  <p>WARNING!!!! THE ONLY WORKING OPTION IN THIS PROTOTYPE IS QUEBEC</p>
   <button type="submit">Calculate Tax</button>
 </form>
 <br>

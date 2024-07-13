@@ -6,15 +6,16 @@ import webdevelopment.jakartaee_pojo_tp.persistance.ITaxBracketDAO;
 
 import java.util.List;
 
-public class TaxCalculator {
+public class TaxCalculatorCanada implements ITaxCalculator{
 
     // DAO call
-    private ITaxBracketDAO daoTax;
+    private final ITaxBracketDAO daoTax;
 
     // dependency injection
-    public TaxCalculator(ITaxBracketDAO dao){this.daoTax =dao;}
+    public TaxCalculatorCanada(ITaxBracketDAO dao){this.daoTax =dao;}
 
 
+    @Override
     public double calculateTax(String taxAuthority, double income) {
         TaxAuthority authority = this.daoTax.getTaxAuthorityByLabel(taxAuthority);
         double taxFreeThreshold = authority.getTaxFreeThreshold();
@@ -44,7 +45,7 @@ public class TaxCalculator {
         return taxOwed;
     }
 
-    public double calculateTaxGPT(String taxAuthority, double income) {
+    /*public double calculateTaxGPT(String taxAuthority, double income) {
         TaxAuthority authority = this.daoTax.getTaxAuthorityByLabel(taxAuthority);
         double taxFreeThreshold = authority.getTaxFreeThreshold();
         if (taxFreeThreshold >= income) {
@@ -62,5 +63,5 @@ public class TaxCalculator {
             }
         }
         return taxOwed;
-    }
+    }*/
 }
